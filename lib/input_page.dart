@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'mycards.dart';
 import 'iconContent.dart';
 import 'mybutton.dart';
+import 'constants.dart';
 
 
 
-const activCardColour = Color(0xFF1D1E33);
-const inactiveCardColour = Color(0xFF111328);
-const appBarColor = Color(0xFF0A0E21);
 enum Gender{
   male,
   female,
   nil,
 }
+
 
 class InputPage extends StatefulWidget {
   @override
@@ -23,15 +22,17 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
 
   Gender selectedGender = Gender.nil;
+  int hight = 180;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: appBarColor,
+        backgroundColor: kappBarColor,
         title: const Center(child: Text('BMI CALCULATOR')),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(child: Row(
             children: [
@@ -42,7 +43,7 @@ class _InputPageState extends State<InputPage> {
                   });
                 },
                 child: mycards(
-                    colour: (selectedGender == Gender.male ? activCardColour : inactiveCardColour),
+                    colour: (selectedGender == Gender.male ? kactivCardColour : kinactiveCardColour),
                     cardChild: iconContent(
                   FontAwesomeIcons.mars,
                   'MALE',
@@ -57,7 +58,7 @@ class _InputPageState extends State<InputPage> {
                 }
                 );},
                 child: mycards(
-                    colour: (selectedGender == Gender.female ? activCardColour : inactiveCardColour),
+                    colour: (selectedGender == Gender.female ? kactivCardColour : kinactiveCardColour),
                     cardChild: iconContent(
                   FontAwesomeIcons.venus,
                   'FEMALE',
@@ -67,19 +68,47 @@ class _InputPageState extends State<InputPage> {
               ),
             ],
           )),
-          Expanded(child: GestureDetector(
-            onTap: (){
-              setState(() {
-                selectedGender = Gender.female;
-              }
-              );},
-            child: mycards(
-                colour: (selectedGender == Gender.female ? activCardColour : inactiveCardColour),
-                cardChild: iconContent(
-                  FontAwesomeIcons.venus,
-                  'FEMALE',
-                )
-            ),
+          Expanded(child: mycards(
+              colour: kactivCardColour,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:  [
+                  const Text('HEIGHT',
+                      style: ktextStyle),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children:  [
+                      Text(hight.toString(),
+                      style: kNumberTextStyle),
+                      const Text('CM',
+                      style: ktextStyle,),
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      inactiveTrackColor: const Color(0xFF8D8E98),
+                      activeTrackColor: Colors.white,
+                      thumbColor: const Color(0xFFEB1555),
+                      overlayColor: const Color(0x29EB1555),
+                      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      overlayShape: const RoundSliderOverlayShape(overlayRadius: 30.0),
+                    ),
+                    child: Slider(value: hight.toDouble(),
+                      onChanged: (double newValue){
+                        setState(() {
+                          hight = newValue.round();
+                        });
+                      },
+                      min: kminSliderHight,
+                      max: kmaxSliderHight,
+
+                    ),
+                  ),
+
+                ],
+              )
           ),
           ),
           Expanded(child: Row(
@@ -91,10 +120,10 @@ class _InputPageState extends State<InputPage> {
                   });
                 },
                 child: mycards(
-                    colour: (selectedGender == Gender.male ? activCardColour : inactiveCardColour),
+                    colour: (selectedGender == Gender.male ? kactivCardColour : kinactiveCardColour),
                     cardChild: iconContent(
                       FontAwesomeIcons.mars,
-                      'MALE',
+                      'Dinka',
                     )
                 ),
               ),
@@ -106,10 +135,10 @@ class _InputPageState extends State<InputPage> {
                   }
                   );},
                 child: mycards(
-                    colour: (selectedGender == Gender.female ? activCardColour : inactiveCardColour),
+                    colour: (selectedGender == Gender.female ? kactivCardColour : kinactiveCardColour),
                     cardChild: iconContent(
                       FontAwesomeIcons.venus,
-                      'FEMALE',
+                      'Chika',
                     )
                 ),
               ),
