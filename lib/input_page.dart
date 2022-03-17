@@ -22,7 +22,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
 
   Gender selectedGender = Gender.nil;
-  int hight = 180;
+  int hight = 160;
+  int weight = 50;
 
   @override
   Widget build(BuildContext context) {
@@ -113,46 +114,72 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(child: Row(
             children: [
-              Expanded(child: GestureDetector(
-                onTap: (){
-                  setState(() {
-                    selectedGender = Gender.male;
-                  });
-                },
-                child: mycards(
-                    colour: (selectedGender == Gender.male ? kactivCardColour : kinactiveCardColour),
-                    cardChild: iconContent(
-                      FontAwesomeIcons.mars,
-                      'Dinka',
-                    )
-                ),
+              Expanded(child: mycards(
+                  colour: kactivCardColour,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('WEIGHT',
+                      style: ktextStyle,),
+                      Text(weight.toString(),
+                      style: kNumberTextStyle,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: const [
+                          Expanded(child: RoundIconButton()),
+                          Expanded(child: RoundIconButton()),
+                        ],
+                      ),
+                    ],
+                  )
               ),
               ),
-              Expanded(child: GestureDetector(
-                onTap: (){
-                  setState(() {
-                    selectedGender = Gender.female;
-                  }
-                  );},
-                child: mycards(
-                    colour: (selectedGender == Gender.female ? kactivCardColour : kinactiveCardColour),
-                    cardChild: iconContent(
-                      FontAwesomeIcons.venus,
-                      'Chika',
-                    )
-                ),
+              Expanded(child: mycards(
+                  colour: kactivCardColour,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('WEIGHT',
+                        style: ktextStyle,),
+                      Text(weight.toString(),
+                        style: kNumberTextStyle,),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: const [
+                          Expanded(child: RoundIconButton()),
+                          Expanded(child: RoundIconButton()),
+                        ],
+                      ),
+                    ],
+                  )
               ),
               ),
             ],
           ),
           ),
-          const button()
+          const button(),
         ],
       ),
     );
   }
 }
 
+class RoundIconButton extends StatelessWidget {
+  const RoundIconButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      onPressed: () {  },
+      shape: const CircleBorder(),
+      fillColor: const Color(0xFF4C4F5E),
+      constraints: const BoxConstraints.tightFor(
+        width: 56.0,
+        height: 56.0,
+      ),
+    );
+  }
+}
 
 
 
