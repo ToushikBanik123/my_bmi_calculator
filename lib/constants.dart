@@ -7,7 +7,7 @@ const kactivCardColour = Color(0xFF1D1E33);
 const kinactiveCardColour = Color(0xFF111328);
 const kappBarColor = Color(0xFF0A0E21);
 const kminSliderHight = 120.0;
-const kmaxSliderHight = 240.0;
+const kmaxSliderHight = 200.0;
 const kbuttonHeight = 80.0;
 const kbuttonColor = Color(0xFFFB1555);
 
