@@ -8,7 +8,8 @@ const kinactiveCardColour = Color(0xFF111328);
 const kappBarColor = Color(0xFF0A0E21);
 const kminSliderHight = 120.0;
 const kmaxSliderHight = 240.0;
-
+const kbuttonHeight = 80.0;
+const kbuttonColor = Color(0xFFFB1555);
 
 
 const ktextStyle =  TextStyle(
@@ -20,4 +21,9 @@ const ktextStyle =  TextStyle(
 const kNumberTextStyle = TextStyle(
   fontSize: 50.0,
   fontWeight: FontWeight.w900,
+);
+
+const kLargButtonTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 25.0,
 );

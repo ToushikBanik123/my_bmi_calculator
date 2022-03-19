@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'mycards.dart';
 import 'iconContent.dart';
 import 'mybutton.dart';
+import 'results_page.dart';
 import 'constants.dart';
-
 
 
 enum Gender{
@@ -23,7 +23,30 @@ class _InputPageState extends State<InputPage> {
 
   Gender selectedGender = Gender.nil;
   int hight = 160;
-  int weight = 50;
+  int _weight = 50;
+  int _age =  20;
+  void _increaseWeight() {
+    setState(() {
+      _weight++;
+    });
+  }
+  void _lossWeight(){
+    setState(() {
+      _weight--;
+    });
+  }
+  void _increasAge(){
+    setState(() {
+      _age++;
+    });
+  }
+
+  void _loosAge(){
+    setState(() {
+      _age--;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -121,13 +144,19 @@ class _InputPageState extends State<InputPage> {
                     children: [
                       const Text('WEIGHT',
                       style: ktextStyle,),
-                      Text(weight.toString(),
+                      Text('$_weight',
                       style: kNumberTextStyle,),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: const [
-                          Expanded(child: RoundIconButton()),
-                          Expanded(child: RoundIconButton()),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: _increaseWeight,
+                              //SetState in RoundIconButton is not allowed. so i created a Gesture Detector for that.
+                              child: RoundIconButton(icon: FontAwesomeIcons.plus, onTap:(){})),
+                          const SizedBox(width: 10.0,),
+                          GestureDetector(
+                              onTap: _lossWeight,
+                              child: RoundIconButton(icon: FontAwesomeIcons.minus, onTap: (){})),
                         ],
                       ),
                     ],
@@ -139,15 +168,20 @@ class _InputPageState extends State<InputPage> {
                   cardChild: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('WEIGHT',
+                      const Text('AGE',
                         style: ktextStyle,),
-                      Text(weight.toString(),
+                      Text('$_age',
                         style: kNumberTextStyle,),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: const [
-                          Expanded(child: RoundIconButton()),
-                          Expanded(child: RoundIconButton()),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: _increasAge,
+                              child: RoundIconButton(icon: FontAwesomeIcons.plus, onTap: (){})),
+                          const SizedBox(width: 10.0,),
+                          GestureDetector(
+                            onTap: _loosAge,
+                              child: RoundIconButton(icon: FontAwesomeIcons.minus, onTap: (){})),
                         ],
                       ),
                     ],
@@ -157,7 +191,12 @@ class _InputPageState extends State<InputPage> {
             ],
           ),
           ),
-          const button(),
+            GestureDetector(
+                onTap: (){
+                  Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ResultPage()),);
+                },
+                child: const button(text: 'CALCULATE'),),
         ],
       ),
     );
@@ -165,14 +204,19 @@ class _InputPageState extends State<InputPage> {
 }
 
 class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({Key? key}) : super(key: key);
 
+  const RoundIconButton({required this.icon , required this.onTap});
+  final IconData icon;
+  final Function onTap;
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
-      onPressed: () {  },
+      onPressed: onTap(),
+      child: Icon(icon),
+      elevation: 6.0,
       shape: const CircleBorder(),
       fillColor: const Color(0xFF4C4F5E),
+
       constraints: const BoxConstraints.tightFor(
         width: 56.0,
         height: 56.0,
@@ -180,7 +224,6 @@ class RoundIconButton extends StatelessWidget {
     );
   }
 }
-
 
 
 

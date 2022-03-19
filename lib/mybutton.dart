@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-const buttonHeight = 80.0;
-const buttonColor = Color(0xFFFB1555);
-
+import 'constants.dart';
 
 
 class button extends StatelessWidget {
   const button({
-    Key? key,
+    Key? key, required this.text
   }) : super(key: key);
-
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Container(
+      child:  Center(child: Text(text,
+      style: kLargButtonTextStyle,)),
       width: double.infinity,
-      height: buttonHeight,
-      color: buttonColor,
+      height: kbuttonHeight,
+      color: kbuttonColor,
     );
   }
 }
