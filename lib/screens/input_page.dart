@@ -1,10 +1,13 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
-import 'mycards.dart';
-import 'iconContent.dart';
-import 'mybutton.dart';
+import 'package:my_bmi_calculator/calculator_brIn.dart';
+import '../components/mycards.dart';
+import '../components/iconContent.dart';
+import '../components/mybutton.dart';
 import 'results_page.dart';
-import 'constants.dart';
+import '../constants.dart';
+import '../components/round_icon_button.dart';
+import 'package:my_bmi_calculator/calculator_brIn.dart';
 
 
 enum Gender{
@@ -193,8 +196,13 @@ class _InputPageState extends State<InputPage> {
           ),
             GestureDetector(
                 onTap: (){
+                  CalculatorBrain calc = CalculatorBrain(height: hight, weight: _weight);
                   Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResultPage()),);
+                    MaterialPageRoute(builder: (context) => ResultPage(
+                      calculateBMI: calc.calculateBMI(),
+                      getInterpritation: calc.getInterpritation(),
+                      getResult: calc.getResult(),
+                    )),);
                 },
                 child: const button(text: 'CALCULATE'),),
         ],
@@ -203,27 +211,6 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class RoundIconButton extends StatelessWidget {
-
-  const RoundIconButton({required this.icon , required this.onTap});
-  final IconData icon;
-  final Function onTap;
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: onTap(),
-      child: Icon(icon),
-      elevation: 6.0,
-      shape: const CircleBorder(),
-      fillColor: const Color(0xFF4C4F5E),
-
-      constraints: const BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-    );
-  }
-}
 
 
 
